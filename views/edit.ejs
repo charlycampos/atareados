@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../views/partials/navegacion'); %>
+</head>
+<body>
+  <% if (titulo) { %>
+    <div class="container mt-4">
+      <div class="card border-secondary">  
+        <div class="card-header">Editar Registro</div>
+          <div class="card-body">
+            <form action="/update" method="POST">
+              <input id="id" name="id" value="<%= titulo.id %>" hidden>
+              <div class="mb-3">
+                <label for="titulo" class="form-label">Titulo</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" tabindex="1" value="<%= titulo.titulo %>" required>                        
+              </div>
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <textarea rows="10" class="form-control" id="descripcion" name="descripcion" tabindex="2" value=""><%= titulo.descripcion %></textarea>                     
+              </div>
+              <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <select id="estado" name="estado" class="form-select"  value="" tabindex="3">
+                  <option <%- titulo.estado=='pendiente' ? "selected" : "" %> value="pendiente">Pendiente</option>
+                  <option <%- titulo.estado=='completado' ? "selected" : "" %> value="completado">Completado</option>
+                </select>
+              </div>                                                              
+              <input id="guardar_edit" type="submit" class="btn btn-primary" tabindex="4" value="Guardar" onclick="valida_vacio_boton(this.form)">
+              <a href="/" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div> 
+      </div>     
+    </div>
+  <% } %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <!--  script donde valida vacios -->
+  <script type="text/javascript" src="/js/valida.js"></script>
+    
+</body>
+</html>
